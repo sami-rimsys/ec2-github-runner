@@ -21,4 +21,4 @@ jobs:
       - name: PM2 stop
         run: pm2 delete all
       - name: PM2 start
-        run: pm2 start app.js --name=node-app
+        run: pm2 start app.js --name=Node-App
