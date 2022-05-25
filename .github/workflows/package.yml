@@ -1,0 +1,30 @@
+on:
+  push:
+    branches:
+      - new-branch-test
+
+name: Package
+
+jobs:
+  package:
+    name: Package distribution files
+    runs-on: self-hosted
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: new-branch-test
+      - name: Install
+        run: npm install
+      - name: Update
+        run: npm update
+       - name: PM2 stop
+        run: pm2 delete all
+      - name: PM2 start
+        run: pm2 start app.js --name=node-app
+      - name: Commit
+        run: |
+          git config --global user.name "GitHub Actions"
+          git add dist/
+          git commit -m "Update dist" || echo "No changes to commit"
+          git push origin main
