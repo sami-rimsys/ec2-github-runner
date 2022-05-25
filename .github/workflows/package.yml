@@ -13,12 +13,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          ref: new-branch-test
+          ref: main
       - name: Install
         run: npm install
       - name: Update
         run: npm update
-       - name: PM2 stop
+      - name: PM2 stop
         run: pm2 delete all
       - name: PM2 start
         run: pm2 start app.js --name=node-app
